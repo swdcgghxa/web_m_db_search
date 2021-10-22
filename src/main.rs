@@ -123,11 +123,24 @@ async fn auto(h: HeaderMap) -> &'static str {
 
 #[tokio::main]
 async fn main() {
+    let dirs = ServeDir::new(std::path::Path::new(
+        "C:\\Users\\s7and\\Pictures\\web_m_db_search_file\\",
+    ))
+    .append_index_html_on_directories(true);
     //hide_console_window();
     let app = Router::new()
         .route("/", get(query))
         .route("/auto/:data", get(auto))
         .route("/search.xml", get(search))
+        .nest(
+            "/dirs",
+            service::get(dirs).handle_error(|error: std::io::Error| {
+                Ok::<_, Infallible>((
+                    StatusCode::INTERNAL_SERVER_ERROR,
+                    format!("找不到檔案 error: {}", error),
+                ))
+            }),
+        )
         .route(
             "/static/course.jpeg",
             service::get(ServeFile::new(
