@@ -24,7 +24,7 @@ use tower_http::{
     trace::TraceLayer,
 };
 async fn search(h: HeaderMap) -> (HeaderMap, StringUtf8) {
-    // <Contact>s7and70and0@outllook.org</Contact>
+    // <Contact>xxxxxxxxxxx@outllook.org</Contact>
     // <Image height="16" width="16" type="favicon.ico?v=1"></Image>
     // <Developer>John Bookos</Developer>
     // <OutputEncoding>UTF-8</OutputEncoding>
@@ -69,7 +69,7 @@ async fn query(
     if let Some(q) = params.get("q") {
         println!("{}", q);
         let uri = if q.as_str() == "mail" {
-            format!("mailto:s7and70and0@outlook.com")
+            format!("mailto:xxxx@outlook.com")
         } else if q.as_str() == "settings" {
             format!("ms-call:settings")
         } else if q.as_str() == "map" {
