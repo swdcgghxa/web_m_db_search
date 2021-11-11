@@ -133,7 +133,7 @@ async fn main() {
         .route("/auto/:data", get(auto))
         .route("/search.xml", get(search))
         .nest(
-            "/dirs",
+            "/dir",
             service::get(dirs).handle_error(|error: std::io::Error| {
                 Ok::<_, Infallible>((
                     StatusCode::INTERNAL_SERVER_ERROR,
